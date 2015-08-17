@@ -1,76 +1,283 @@
 <html>
 <head>
-    <title>daniel.cash</title>
+  <title>daniel.cash</title>
 
-    <style>
+  <style>
 
-@-moz-keyframes bg /* Firefox */
-{
-    0%   {background:yellow;}
-    50%  {background:red;}
-    100%   {background:yellow;}
-}
+  body {
+    height: 100%;
+  }
 
-@-webkit-keyframes bg /* Firefox */
-{
-    0%   {background:yellow;}
-    50%  {background:red;}
-    100%   {background:yellow;}
-}
-    body {
-        cursor:url(cursor.png), pointer;
-        background: #222;
-        -webkit-animation:bg 5s infinite;
-        -moz-animation:bg 5s infinite;
-        animation:bg 5s infinite;
+  body {
+    background: #09f;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjEuMCIgeDI9IjAuNSIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwOTlmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzQ1ZDFmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #0099ff), color-stop(100%, #45d1ff));
+    background-image: -moz-linear-gradient(bottom, #0099ff, #45d1ff);
+    background-image: -webkit-linear-gradient(bottom, #0099ff, #45d1ff);
+    background-image: linear-gradient(to top, #0099ff, #45d1ff);
+  }
+
+  .bubble-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    font-family: sans-serif;
+    font-size: 13px;
+    color: #333;
+  }
+  .bubble-toggle:hover {
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .bubbles {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  .bubble-container {
+    position: absolute;
+    bottom: 0;
+    -webkit-animation: bubblerise 4s infinite ease-in;
+    -moz-animation: bubblerise 4s infinite ease-in;
+    -ms-animation: bubblerise 4s infinite ease-in;
+    animation: bubblerise 4s infinite ease-in;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+  }
+
+  .bubble {
+    width: 6px;
+    height: 6px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-animation: bubblewobble 0.4s infinite linear;
+    -moz-animation: bubblewobble 0.4s infinite linear;
+    -ms-animation: bubblewobble 0.4s infinite linear;
+    animation: bubblewobble 0.4s infinite linear;
+  }
+
+  @-webkit-keyframes bubblerise {
+    0% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
     }
-img {
+    5% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    99% {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    100% {
+      bottom: 100%;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+  }
+  @-moz-keyframes bubblerise {
+    0% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+    5% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    99% {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    100% {
+      bottom: 100%;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+  }
+  @-ms-keyframes bubblerise {
+    0% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+    5% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    99% {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    100% {
+      bottom: 100%;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+  }
+  @keyframes bubblerise {
+    0% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+    5% {
+      bottom: 0;
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    99% {
+      filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+      opacity: 1;
+    }
+    100% {
+      bottom: 100%;
+      filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes bubblewobble {
+    0% {
+      margin-left: 0;
+    }
+    50% {
+      margin-left: 2px;
+    }
+  }
+  @-moz-keyframes bubblewobble {
+    0% {
+      margin-left: 0;
+    }
+    50% {
+      margin-left: 2px;
+    }
+  }
+  @-ms-keyframes bubblewobble {
+    0% {
+      margin-left: 0;
+    }
+    50% {
+      margin-left: 2px;
+    }
+  }
+  @keyframes bubblewobble {
+    0% {
+      margin-left: 0;
+    }
+    50% {
+      margin-left: 2px;
+    }
+  }
+  body {
+    cursor:url(cursor.png), pointer;
+  }
+  img {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 453px;
-    height: 603px;
     margin:-300px 0 0 -275px;
+    color: black;
+    font-size:24px;
+    padding: 10px 16px;
+    animation:myfirst 5s;
+    -moz-animation:myfirst 5s infinite; /* Firefox */
+    -webkit-animation:myfirst 5s infinite; /* Safari and Chrome */
 
-  color: black;
-  font-size:24px;
-  padding: 10px 16px;
-  border: 2px solid black;
-  display:inline-block;
-  border-radius: 10px;
-  background:pink;
-  animation:myfirst 5s;
-  -moz-animation:myfirst 5s infinite; /* Firefox */
-  -webkit-animation:myfirst 5s infinite; /* Safari and Chrome */
-}
+    -webkit-transition: width 10s, height 10s, margin 10s;
+    -moz-transition: width 10s, height 10s, margin 10s;
+    -ms-transition: width 10s, height 10s, margin 10s;
+    transition: width 10s, height 10s, margin 10s;
+    width: 25px;
+    height: 25px;
+  }
+  img:hover {
+    -webkit-animation:spin 4s linear infinite, 5s infinite;
+    -moz-animation:spin 4s linear infinite, 5s infinite;
+    animation:spin 4s linear infinite, 5s infinite;
+    width: 500px;
+    height: 375px;
+  }
+  @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+  @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+  @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+  @font-face {
+    font-family: nemo;
+    src: url('nemo.ttf');
+  }
+  marquee {
+    position: fixed;
+    bottom: 0;
+    background: transparent;
+    font-family: 'Nemo';
+    font-size: 60px;
+    color: white;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #F60;
+  }
+  </style>
 
-@-moz-keyframes myfirst /* Firefox */
-{
-    0%   {background:red;}
-    50%  {background:yellow;}
-    100%   {background:red;}
-}
-
-@-webkit-keyframes myfirst /* Firefox */
-{
-    0%   {background:red;}
-    50%  {background:yellow;}
-    100%   {background:red;}
-}
-
-img:hover {
-    -webkit-animation:spin 4s linear infinite, myfirst 5s infinite;
-    -moz-animation:spin 4s linear infinite, myfirst 5s infinite;
-    animation:spin 4s linear infinite, myfirst 5s infinite;
-}
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-    </style>
 </head>
 <body>
-    <img style='' src='dcash.jpg' onmouseover="javascript: document.getElementById('hotdog-mp3').play();">
-    <audio autoplay="autoplay" src='tiger.mp3'>
+  <div class="bubbles"></div>
+  <img style='' src='dcash.png' onmouseover="javascript: document.getElementById('hotdog-mp3').play();">
+  <marquee>Eye of the Tiger Fish</marquee>
+
+  <audio autoplay="autoplay" src='tiger.mp3'>
     <audio id='hotdog-mp3' src='hotdog.mp3'>
+      <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+      <script>
+      var $bubbles = $('.bubbles');
+      function bubbles() {
+        var min_bubble_count = 20, max_bubble_count = 60, min_bubble_size = 3, max_bubble_size = 12;
+        var bubbleCount = min_bubble_count + Math.floor(Math.random() * (max_bubble_count + 1));
+        for (var i = 0; i < bubbleCount; i++) {
+          $bubbles.append('<div class="bubble-container"><div class="bubble"></div></div>');
+        }
+        $bubbles.find('.bubble-container').each(function () {
+          var pos_rand = Math.floor(Math.random() * 101);
+          var size_rand = min_bubble_size + Math.floor(Math.random() * (max_bubble_size + 1));
+          var delay_rand = Math.floor(Math.random() * 16);
+          var speed_rand = 3 + Math.floor(Math.random() * 9);
+          var blur_rand = Math.floor(Math.random() * 3);
+          var $this = $(this);
+          $this.css({
+            'left': pos_rand + '%',
+            '-webkit-animation-duration': speed_rand + 's',
+            '-moz-animation-duration': speed_rand + 's',
+            '-ms-animation-duration': speed_rand + 's',
+            'animation-duration': speed_rand + 's',
+            '-webkit-animation-delay': delay_rand + 's',
+            '-moz-animation-delay': delay_rand + 's',
+            '-ms-animation-delay': delay_rand + 's',
+            'animation-delay': delay_rand + 's',
+            '-webkit-filter': 'blur(' + blur_rand + 'px)',
+            '-moz-filter': 'blur(' + blur_rand + 'px)',
+            '-ms-filter': 'blur(' + blur_rand + 'px)',
+            'filter': 'blur(' + blur_rand + 'px)'
+          });
+          $this.children('.bubble').css({
+            'width': size_rand + 'px',
+            'height': size_rand + 'px'
+          });
+        });
+}
+bubbles();
+
+</script>
+<marquee>Eye of the Tiger Fish...</marquee>
 </body>
 </html>
