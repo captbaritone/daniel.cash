@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>daniel.cash</title>
+
+    <style>
+
+@-moz-keyframes bg /* Firefox */
+{
+    0%   {background:yellow;}
+    50%  {background:red;}
+    100%   {background:yellow;}
+}
+
+@-webkit-keyframes bg /* Firefox */
+{
+    0%   {background:yellow;}
+    50%  {background:red;}
+    100%   {background:yellow;}
+}
+    body {
+        cursor:url(cursor.png), pointer;
+        background: #222;
+        -webkit-animation:bg 5s infinite;
+        -moz-animation:bg 5s infinite;
+        animation:bg 5s infinite;
+    }
+img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 453px;
+    height: 603px;
+    margin:-300px 0 0 -275px;
+
+  color: black;
+  font-size:24px;
+  padding: 10px 16px;
+  border: 2px solid black;
+  display:inline-block;
+  border-radius: 10px;
+  background:pink;
+  animation:myfirst 5s;
+  -moz-animation:myfirst 5s infinite; /* Firefox */
+  -webkit-animation:myfirst 5s infinite; /* Safari and Chrome */
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    0%   {background:red;}
+    50%  {background:yellow;}
+    100%   {background:red;}
+}
+
+@-webkit-keyframes myfirst /* Firefox */
+{
+    0%   {background:red;}
+    50%  {background:yellow;}
+    100%   {background:red;}
+}
+
+img:hover {
+    -webkit-animation:spin 4s linear infinite, myfirst 5s infinite;
+    -moz-animation:spin 4s linear infinite, myfirst 5s infinite;
+    animation:spin 4s linear infinite, myfirst 5s infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <img style='' src='dcash.jpg'>
+    <audio autoplay="autoplay" src='tiger.mp3'>
+</body>
+</html>
