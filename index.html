@@ -220,7 +220,7 @@
   }
   marquee {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     background: transparent;
     font-family: 'Nemo';
     font-size: 60px;
@@ -228,16 +228,36 @@
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #F60;
   }
+  .gtrice {
+    width: 196px;
+    height:360px;
+    background: url('img/gtrice.gif');
+    display: inline-block;
+    border: 2px solid #F60;
+    box-shadow: 3px 3px 3px #333;
+  }
+  .flipped {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+  }
   </style>
 
 </head>
 <body>
   <div class="bubbles"></div>
-  <img style='' src='dcash.png' onmouseover="javascript: document.getElementById('hotdog-mp3').play();">
-  <marquee>Eye of the Tiger Fish</marquee>
+  <img style="" src="img/dcash.png" onmouseover="javascript: document.getElementById('hotdog-mp3').play();">
+  <marquee>
+    <div class="gtrice"></div>
+    <span>It's My Jam!</span>
+    <div class="gtrice flipped"></div>
+  </marquee>
 
-  <audio autoplay="autoplay" src='tiger.mp3'>
-    <audio id='hotdog-mp3' src='hotdog.mp3'>
+  <audio autoplay="autoplay" src="audio/delight.mp3">
+    <audio id="hotdog-mp3" src="audio/hotdog.mp3">
       <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
       <script>
       var $bubbles = $('.bubbles');
@@ -278,7 +298,5 @@
 bubbles();
 
 </script>
-<script src="https://rawgit.com/scottschiller/Snowstorm/master/snowstorm.js"></script>
-<marquee>Eye of the Tiger Fish...</marquee>
 </body>
 </html>
